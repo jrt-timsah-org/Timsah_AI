@@ -1,0 +1,9 @@
+# 5.x removed several legacy APIs used by Haar Cascade face detection.
+# 4.14 supports Python 3.14 and keeps the classic CascadeClassifier API.
+# Ultralytics requires the GUI-enabled OpenCV distribution; pin to the latest
+# 4.x release because 5.x removed CascadeClassifier and is not yet compatible.
+opencv-python==4.14.0.94
+Pillow>=10.0
+# pygame-ce provides a prebuilt macOS wheel for Python 3.14 and imports as pygame.
+pygame-ce==2.5.8
+ultralytics>=8.3
