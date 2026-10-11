@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")" && pwd)"
+export YOLO_CONFIG_DIR="$ROOT/.settings"
+mkdir -p "$YOLO_CONFIG_DIR/Ultralytics"
+export MPLBACKEND=Agg
+export OMP_NUM_THREADS=4
+export MKL_NUM_THREADS=4
+export OPENBLAS_NUM_THREADS=1
+export PYTHONUNBUFFERED=1
+exec "$ROOT/.venv/bin/python" "$ROOT/scripts/lab.py" "$@"

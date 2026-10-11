@@ -1,0 +1,72 @@
+# Python environments and caches, anywhere in the workspace.
+.venv/
+.venv-*/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+
+# Other tool environments and notebook caches.
+node_modules/
+.ipynb_checkpoints/
+
+# Local secrets and configuration.
+.env
+.env.*
+!.env.example
+
+# Local-only model files, including accidental copies outside weights/.
+*.pt
+*.pth
+*.safetensors
+*.ckpt
+*.gguf
+*.ggml
+*.onnx
+*.h5
+*.hdf5
+*.tflite
+*.pb
+*.bin
+
+# Keep directory structure and model documentation; ignore weight payloads.
+weights/**
+!weights/**/
+!weights/**/.gitkeep
+!weights/**/README.md
+!weights/**/model.example.json
+!weights/**/model.json
+
+# Datasets and generated results are local, including nested directories.
+datasets/**
+!datasets/**/
+!datasets/**/.gitkeep
+!datasets/**/README.md
+outputs/**
+!outputs/**/
+!outputs/**/.gitkeep
+!outputs/**/README.md
+runs/
+wandb/
+*.log
+
+# OS and editor-local files.
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Publish YOLO Lab pretrained models and training checkpoints.
+# These explicit exceptions override the general local-only weight policy.
+!weights/yolo_lab/pretrained/*.pt
+!weights/yolo_lab/extra/*.pt
+!outputs/yolo_lab/runs/
+!outputs/yolo_lab/runs/**/
+!outputs/yolo_lab/runs/**/weights/*.pt

@@ -1,0 +1,8 @@
+.venv/
+datasets/*
+models/*
+runs/*
+logs/*
+.settings/
+__pycache__/
+*.pyc

@@ -1,0 +1,19 @@
+# RTX 3060 12GB: transfer learning at the dataset's native image size.
+model: yolov8n.pt
+epochs: 50
+patience: 10
+imgsz: 512
+batch: 0.70
+device: 0
+workers: 6
+cache: disk
+amp: true
+optimizer: auto
+cos_lr: true
+close_mosaic: 10
+seed: 42
+deterministic: false
+save: true
+save_period: 5
+plots: true
+val: true
