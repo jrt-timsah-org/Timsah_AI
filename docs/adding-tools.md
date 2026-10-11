@@ -39,7 +39,8 @@ python apps/my_ai_tool/main.py
 | 推論結果・学習チェックポイント | `outputs/my_ai_tool/` | 対象外 |
 | ノートブック | `notebooks/` | 対象 |
 
-YOLO Lab の事前学習重みと `outputs/yolo_lab/runs/**/weights/*.pt` は例外として
+既定の `weights/robot_panel/best.pt`、YOLO Lab の事前学習重み、
+`outputs/yolo_lab/runs/**/weights/*.pt` は例外として
 Git 管理しています。他の重みを共有する場合も、該当パスの例外を `.gitignore` に追加します。
 
 小さなテスト用データを共有したい場合は、各プロジェクトの `tests/fixtures/` に置きます。

@@ -1,5 +1,6 @@
-# RTX 3060 12GB: transfer learning at the dataset's native image size.
-model: yolov8n.pt
+# Fine-tune the bundled trained panel model at the dataset's native image size.
+# Paths containing directories are relative to the repository root.
+model: weights/robot_panel/best.pt
 epochs: 50
 patience: 10
 imgsz: 512

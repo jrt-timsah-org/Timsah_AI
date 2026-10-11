@@ -48,18 +48,13 @@ RED = "#fb5267"
 PROJECT_DIR = Path(__file__).resolve().parent
 REPOSITORY_DIR = PROJECT_DIR.parents[1]
 DEFAULT_MODEL_PATH = REPOSITORY_DIR / "weights" / "robot_panel" / "best.pt"
-LEGACY_MODEL_PATH = REPOSITORY_DIR.parent / "Panel_Yolo" / "best.pt"
 
 
 def resolve_model_path() -> Path:
-    """Prefer an explicit model, then workspace weights, then the old location."""
+    """Use the bundled trained best.pt unless explicitly overridden."""
     configured = os.environ.get("ROBOT_PANEL_MODEL")
     if configured:
         return Path(configured).expanduser()
-    if DEFAULT_MODEL_PATH.is_file():
-        return DEFAULT_MODEL_PATH
-    if LEGACY_MODEL_PATH.is_file():
-        return LEGACY_MODEL_PATH
     return DEFAULT_MODEL_PATH
 
 

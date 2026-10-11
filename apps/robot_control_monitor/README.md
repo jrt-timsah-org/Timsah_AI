@@ -40,15 +40,12 @@ python -m pip install -r apps/robot_control_monitor/requirements.txt
 
 ## モデルの準備
 
-学習済みモデル（`best.pt`）は本リポジトリに含まれていません。次のいずれかで指定してください。
-
-1. リポジトリ内の `weights/robot_panel/best.pt` に置く
-2. 環境変数 `ROBOT_PANEL_MODEL` でパスを指定する（こちらが優先）
-
-移行前の `../Panel_Yolo/best.pt` も、新しい既定パスにモデルがない場合は
-引き続き読み込みます。既定パスは起動時のカレントディレクトリに依存しません。
+学習済み `weights/robot_panel/best.pt` を同梱しており、既定でこのモデルを使います。
+YOLO Lab の `damage-panel4-v1-nano` の最良チェックポイントです。
+モデルの追加配置は不要です。既定パスは起動時のカレントディレクトリに依存しません。
+別のモデルを使う場合は、環境変数 `ROBOT_PANEL_MODEL` で指定してください。
 環境変数で指定した相対パスは、起動時のカレントディレクトリを基準にします。
-重みファイルは Git 管理の対象外です。
+同梱の `best.pt` は Git で共有しています。
 
 ```bash
 ROBOT_PANEL_MODEL=/path/to/best.pt python apps/robot_control_monitor/app.py

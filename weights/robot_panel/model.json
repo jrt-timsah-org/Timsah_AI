@@ -1,0 +1,22 @@
+{
+  "name": "robot_panel",
+  "version": "damage-panel4-v1-nano",
+  "format": "ultralytics-pt",
+  "source": "outputs/yolo_lab/runs/damage-panel4-v1-nano/weights/best.pt",
+  "license": null,
+  "used_by": [
+    "apps/robot_control_monitor",
+    "tools/yolo_lab"
+  ],
+  "files": [
+    {
+      "path": "best.pt",
+      "sha256": "764038b208922fe7ccf7972e29845daba47b1f806e65025a2d71db9a21939e09"
+    }
+  ],
+  "classes": [
+    "1",
+    "Damage-Panel3",
+    "Damage-Panel4"
+  ]
+}

@@ -2,14 +2,14 @@
 
 モデルの重みはこのディレクトリにまとめます。ファイル形式は問いません。
 実体は既定では `.gitignore` で除外し、説明と入手情報をコミットします。
-YOLO Lab の `pretrained/*.pt` と `extra/*.pt`、および
+同梱の `robot_panel/best.pt`、YOLO Lab の `pretrained/*.pt` と `extra/*.pt`、および
 `outputs/yolo_lab/runs/**/weights/*.pt` は例外として Git に含めています。
 
 ```text
 weights/
 ├── robot_panel/
 │   ├── README.md
-│   └── best.pt                 # 既存モニター用（ローカルに用意）
+│   └── best.pt                 # 同梱の学習済みモデル（Git 管理）
 └── my_model/
     └── v1/
         ├── README.md

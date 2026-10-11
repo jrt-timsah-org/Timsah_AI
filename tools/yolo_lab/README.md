@@ -10,12 +10,13 @@ RTX 3060 12GB / Ryzen 5 5600G / Python 3.12 向けの、データセットを切
 | 内容 | リポジトリ直下からのパス |
 | --- | --- |
 | 登録データ | `datasets/yolo_lab/` |
+| 既定の学習済み重み | `weights/robot_panel/best.pt` |
 | 事前学習重み | `weights/yolo_lab/pretrained/` |
 | 追加の重み | `weights/yolo_lab/extra/` |
 | 実験結果・チェックポイント | `outputs/yolo_lab/runs/` |
 | 実行ログ | `outputs/yolo_lab/logs/` |
 
-元の `/mnt/hdd/LLM-Experiments/yolo-lab` は変更していません。既存の学習結果と重みを
+コピー元の YOLO Lab は変更していません。既存の学習結果と重みを
 コピーしていますが、プロセスは引き継ぎません。コピーした実験の `status` は記録を表示し、
 `stop` は元の実行には作用しません。新しい学習には別の実験名を使ってください。
 既存チェックポイントには元の学習環境の設定が含まれるため、再学習の初期重みとして
@@ -25,15 +26,16 @@ RTX 3060 12GB / Ryzen 5 5600G / Python 3.12 向けの、データセットを切
 データセットへの変更は元環境にも共有されます。仮想環境・キャッシュ・Ultralyticsの
 ローカル設定はコピーせず、この場所で専用の仮想環境を作成します。
 
-コピーしたモデルをモニターで使う場合は、リポジトリ直下から指定できます。
+モニターも同梱の `weights/robot_panel/best.pt` を既定で使います。
+リポジトリ直下から起動してください。
 
 ```bash
-ROBOT_PANEL_MODEL="$PWD/outputs/yolo_lab/runs/damage-panel4-v1-nano/weights/best.pt" python app.py
+python app.py
 ```
 
 モニターの依存関係は別途セットアップしてください。
 
-事前学習重みと `runs/**/weights/*.pt` のチェックポイントは Git に含めています。
+既定の `best.pt`、事前学習重み、`runs/**/weights/*.pt` のチェックポイントは Git に含めています。
 実験の図・メトリクス・ログ、データセットへのリンクはローカルのみです。
 新しくcloneした環境では、データセットを登録して新しい実験名で学習してください。
 推論・エクスポートには、cloneしたチェックポイントをそのまま指定できます。
@@ -49,12 +51,12 @@ CUDA 12.6対応PyTorchを専用 `.venv` にインストールします。ホス�
 ## データセットを登録・切り替え
 
 ```bash
-./yolo-lab import /mnt/hdd/FileSystems/Downloads/Damage_Panel4.v1i.yolov8.zip \
-  --name my-panel-v1 --storage /home/slaviaaa2/.cache/yolo-lab/datasets
+./yolo-lab import /path/to/dataset.zip \
+  --name my-panel-v1 --storage "$HOME/.cache/yolo-lab/datasets"
 
 # 次のZIPを、別の名前で追加します。既存のデータは上書きしません。
 ./yolo-lab import /absolute/path/new-dataset.zip --name next-v1 \
-  --storage /home/slaviaaa2/.cache/yolo-lab/datasets
+  --storage "$HOME/.cache/yolo-lab/datasets"
 ./yolo-lab start --data next-v1 --name next-v1-nano
 ```
 
@@ -88,7 +90,10 @@ CUDA 12.6対応PyTorchを専用 `.venv` にインストールします。ホス�
   --set model=yolov8s.pt --set imgsz=640 --set batch=0.65
 ```
 
-既定値は `configs/default.yaml` で管理します。YOLOv8nの事前学習重みから転移学習し、512px、最大50エポック、改善が10エポック止まったら早期終了します。AMP、自動バッチサイズ（GPUメモリ70%目標）、6ワーカー、SSDディスクキャッシュを使用します。全学習画像を使います。`deterministic: false` は速度を優先する設定で、同じseedでも厳密に同じ結果を保証しません。
+既定値は `configs/default.yaml` で管理します。同梱の学習済み `weights/robot_panel/best.pt` から追加学習し、512px、最大50エポック、改善が10エポック止まったら早期終了します。AMP、自動バッチサイズ（GPUメモリ70%目標）、6ワーカー、SSDディスクキャッシュを使用します。全学習画像を使います。`deterministic: false` は速度を優先する設定で、同じseedでも厳密に同じ結果を保証しません。
+
+`model` のディレクトリ付き相対パスはリポジトリ直下を基準に解決します。
+`yolov8n.pt` のようなファイル名だけなら `weights/yolo_lab/pretrained/` を参照します。
 
 `start` は端末やチャットと独立したプロセスで実行します。PCの電源オフ・スリープ・再起動中は学習できません。プロセス状態は `status`、詳細ログは `../../outputs/yolo_lab/logs/` で確認します。途中経過はエポック完了時に更新され、完了後は最良モデルをテスト分割で評価し、`test-metrics.json` に保存します。検証分割はモデル選択、テスト分割は最終評価に使います。
 

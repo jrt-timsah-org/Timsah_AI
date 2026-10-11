@@ -65,6 +65,7 @@ Thumbs.db
 
 # Publish YOLO Lab pretrained models and training checkpoints.
 # These explicit exceptions override the general local-only weight policy.
+!weights/robot_panel/best.pt
 !weights/yolo_lab/pretrained/*.pt
 !weights/yolo_lab/extra/*.pt
 !outputs/yolo_lab/runs/

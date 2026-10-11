@@ -27,6 +27,16 @@ LOGS_DIR = WORKSPACE / 'outputs' / 'yolo_lab' / 'logs'
 IMAGE_SUFFIXES = {'.jpg', '.jpeg', '.png', '.bmp', '.webp', '.tif', '.tiff'}
 
 
+def model_path(value):
+    """Resolve repository paths or short names in the pretrained directory."""
+    path = Path(str(value)).expanduser()
+    if path.is_absolute():
+        return path
+    if path.parent == Path('.'):
+        return MODELS_DIR / path
+    return (WORKSPACE / path).resolve()
+
+
 def write_json(path, value):
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -264,9 +274,7 @@ def train(args):
         raise RuntimeError('CUDA is not available. Run ./yolo-lab doctor.')
     cfg['data'] = str(data_path(args.data))
     cfg.update(project=str(RUNS_DIR), name=name, exist_ok=True)
-    model_name = cfg.pop('model')
-    if not Path(str(model_name)).is_absolute():
-        model_name = MODELS_DIR / model_name
+    model_name = model_path(cfg.pop('model'))
     checkpoint = Path(args.resume).expanduser().resolve() if args.resume else model_name
     if args.resume and checkpoint.parent.parent != run:
         raise ValueError('--name must match the run containing the resume checkpoint')
