@@ -41,7 +41,8 @@ python -m pip install -r apps/robot_control_monitor/requirements.txt
 ## モデルの準備
 
 学習済み `weights/robot_panel/best.pt` を同梱しており、既定でこのモデルを使います。
-YOLO Lab の `damage-panel4-v1-nano` の最良チェックポイントです。
+YOLO Lab の `unified-damage-panel-v1-nano` の最良チェックポイントです。
+検出クラスは `Damage-Panel` の1クラスです。
 モデルの追加配置は不要です。既定パスは起動時のカレントディレクトリに依存しません。
 別のモデルを使う場合は、環境変数 `ROBOT_PANEL_MODEL` で指定してください。
 環境変数で指定した相対パスは、起動時のカレントディレクトリを基準にします。
@@ -69,7 +70,7 @@ python apps/robot_control_monitor/app.py
 | `L2/ZL`・`R2/ZR` | 左から順にターゲットIDを選択（Proコントローラー） |
 | `A` | 選択中のターゲットに `[HIT!]` 演出を表示 |
 | `CONFIDENCE` | 検出しきい値を 10〜95% で調整 |
-| `ALLOW CLASS` | 許可クラスを切り替え（`BOTH` / `1 ONLY` / `PANEL 3`） |
+| `ALLOW CLASS` | `ALL` または読み込んだモデルのクラスを選択（既定モデルは `Damage-Panel`） |
 | `MAX ASPECT` | 縦横比フィルター。`1.8:1` より横長・縦長の枠を除外 |
 | `LONG RANGE` | 推論解像度を 960px に上げ、遠方の小さなパネルを検出しやすくする（FPSは低下） |
 | `RECONNECT CAMERA` | カメラを再接続 |

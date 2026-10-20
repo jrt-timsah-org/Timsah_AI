@@ -45,6 +45,8 @@ python -m pip install -r apps/robot_control_monitor/requirements.txt
 ```
 
 同梱の学習済み `weights/robot_panel/best.pt` を使って起動します。モデルの追加配置は不要です。
+現在のモデルは `unified-damage-panel-v1-nano`（`Damage-Panel` 1クラス）です。
+学習条件・テスト評価・出典は [モデルの記録](weights/robot_panel/README.md) を参照してください。
 
 ```bash
 python apps/robot_control_monitor/app.py

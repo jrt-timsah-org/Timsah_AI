@@ -6,6 +6,8 @@ YOLO Lab からコピーした事前学習重みです。
 - `extra/yolo26n.pt`: 元環境にあった追加モデル。
 
 コピーした学習済み重みは `outputs/yolo_lab/runs/damage-panel4-v1-nano/weights/` にあります。
+現在の既定モデルの最良・最終チェックポイントは
+`outputs/yolo_lab/runs/unified-damage-panel-v1-nano/weights/` にあります。
 これらの `.pt` は学習済みチェックポイントを含めて Git で共有しています。
 追加のモデルは `pretrained/` に置き、
 `--set model=<ファイル名>` で指定できます。

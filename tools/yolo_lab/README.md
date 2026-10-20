@@ -27,6 +27,10 @@ RTX 3060 12GB / Ryzen 5 5600G / Python 3.12 向けの、データセットを切
 ローカル設定はコピーせず、この場所で専用の仮想環境を作成します。
 
 モニターも同梱の `weights/robot_panel/best.pt` を既定で使います。
+現在は `unified-damage-panel-v1-nano`（`Damage-Panel` 1クラス）の最良チェックポイントです。
+元の学習は YOLOv8n 事前学習重みから512px・50エポックで実施しました。
+学習データと分割方法は [データセットの記録](DATASET-NOTES.md)、評価結果は
+[モデルの記録](../../weights/robot_panel/README.md) を参照してください。
 リポジトリ直下から起動してください。
 
 ```bash

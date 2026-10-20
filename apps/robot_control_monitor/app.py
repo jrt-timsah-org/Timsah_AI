@@ -95,7 +95,7 @@ class RobotControlMonitor(tk.Tk):
         self.controller_scan_at = 0.0
         # Long-range mode renders larger YOLO inputs; lower confidence helps tiny panels.
         self.confidence = tk.DoubleVar(value=0.35)
-        # "BOTH" accepts all classes; the two other choices aid field diagnosis.
+        # "BOTH" is the internal all-classes value; choices follow the loaded model.
         self.allowed_class = tk.StringVar(value="BOTH")
         self.max_aspect_ratio = tk.DoubleVar(value=1.8)
         self.long_range_enabled = True
@@ -235,10 +235,12 @@ class RobotControlMonitor(tk.Tk):
         class_buttons = tk.Frame(class_row, bg=PANEL)
         class_buttons.pack(fill="x", pady=(3, 0))
         self.class_buttons: dict[str, tk.Button] = {}
-        for value, label in (("BOTH", "BOTH"), ("1", "1 ONLY"), ("Damage-Panel3", "PANEL 3")):
+        class_buttons.columnconfigure((0, 1), weight=1)
+        class_options = [("BOTH", "ALL"), *[(name, name) for name in self.panel_model.names.values()]]
+        for index, (value, label) in enumerate(class_options):
             button = self._button(class_buttons, label, lambda item=value: self.set_allowed_class(item),
                                   accent=CYAN, padx=5, pady=5)
-            button.pack(side="left", fill="x", expand=True, padx=(0, 4))
+            button.grid(row=index // 2, column=index % 2, sticky="ew", padx=(0, 4), pady=(0, 4))
             self.class_buttons[value] = button
         self._refresh_class_buttons()
         aspect_row = tk.Frame(controls, bg=PANEL)

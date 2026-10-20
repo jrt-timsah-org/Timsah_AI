@@ -1,8 +1,8 @@
 {
   "name": "robot_panel",
-  "version": "damage-panel4-v1-nano",
+  "version": "unified-damage-panel-v1-nano",
   "format": "ultralytics-pt",
-  "source": "outputs/yolo_lab/runs/damage-panel4-v1-nano/weights/best.pt",
+  "source": "outputs/yolo_lab/runs/unified-damage-panel-v1-nano/weights/best.pt",
   "license": null,
   "used_by": [
     "apps/robot_control_monitor",
@@ -11,12 +11,53 @@
   "files": [
     {
       "path": "best.pt",
-      "sha256": "764038b208922fe7ccf7972e29845daba47b1f806e65025a2d71db9a21939e09"
+      "sha256": "4822f4da9176ecc8a1ac5445ff8855ff065973d9fcb32c58d13efe6926d63341"
     }
   ],
   "classes": [
-    "1",
-    "Damage-Panel3",
-    "Damage-Panel4"
-  ]
+    "Damage-Panel"
+  ],
+  "training": {
+    "architecture": "YOLOv8n",
+    "pretrained_weights": "weights/yolo_lab/pretrained/yolov8n.pt",
+    "dataset": "unified-damage-panel-v1",
+    "source_archive": "Unified_Damage_Panel_Dataset.zip",
+    "source_archive_sha256": "b55eecad20eb3bfc00fbb0e382e41badddfdd7c3da08f247f146ae5e5a55b179",
+    "format_conversion": "COCO bounding boxes to normalized YOLO bounding boxes",
+    "imgsz": 512,
+    "epochs": 50,
+    "batch_size": 65,
+    "seed": 42,
+    "deterministic": false,
+    "completed_at": "2026-10-21T02:07:24.963406+09:00",
+    "split_grouping": "Original extra.name (or source filename) and SHA256 connected components, across dataset prefixes",
+    "source_groups": 767,
+    "splits": {
+      "train": {
+        "images": 7172,
+        "boxes": 62219
+      },
+      "val": {
+        "images": 897,
+        "boxes": 7853
+      },
+      "test": {
+        "images": 909,
+        "boxes": 8248
+      }
+    }
+  },
+  "validation_metrics": {
+    "metrics/precision(B)": 0.9726664045118011,
+    "metrics/recall(B)": 0.9098433719597606,
+    "metrics/mAP50(B)": 0.9492370746546644,
+    "metrics/mAP50-95(B)": 0.8473637082528169
+  },
+  "test_metrics": {
+    "metrics/precision(B)": 0.9818991583448246,
+    "metrics/recall(B)": 0.8878778794207336,
+    "metrics/mAP50(B)": 0.9278718069117637,
+    "metrics/mAP50-95(B)": 0.8303155396400512,
+    "fitness": 0.8303155396400512
+  }
 }
